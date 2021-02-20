@@ -19,6 +19,16 @@
 
     @yield('content')
 
+    <footer class="page-footer font-small blue" style="margin-top: 1.6rem;">
+        <!-- Copyright -->
+        <small>
+            <div class="footer-copyright text-center py-3">© 2021 Copyright:
+                <a href="#"> Shigeyoshi Koyama</a>
+            </div>
+        </small>
+        <!-- Copyright -->
+    </footer>
+
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Bootstrap tooltips -->

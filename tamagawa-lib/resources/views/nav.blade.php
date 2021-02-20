@@ -1,18 +1,23 @@
-<nav class="navbar navbar-expand navbar-dark blue-gradient">
+<nav class="navbar navbar-expand navbar-dark blue-gradient mb-2">
 
-    <a class="navbar-brand" href="/"><i class="far fa-sticky-note mr-1"></i>多摩川釣り図鑑</a>
+    <a class="navbar-brand" href="/">多摩川釣り図鑑</a>
 
     <ul class="navbar-nav ml-auto">
 
         @guest
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('register') }}">ユーザー登録</a>
-        </li>
-        @endguest
-
-        @guest
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('login') }}">ログイン</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user-circle"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <button class="dropdown-item" type="button" onclick="location.href='{{ route('register') }}'">
+                    ユーザー登録
+                </button>
+                <button class="dropdown-item" type="button" onclick="location.href='{{ route('login') }}'">
+                    ログイン
+                </button>
+                <div class="dropdown-divider"></div>
+            </div>
         </li>
         @endguest
 
