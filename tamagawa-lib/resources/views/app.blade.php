@@ -17,16 +17,16 @@
 
 <body>
 
+    <!-- main -->
     @yield('content')
 
+    <!-- footer -->
     <footer class="page-footer font-small blue" style="margin-top: 1.6rem;">
-        <!-- Copyright -->
         <small>
             <div class="footer-copyright text-center py-3">© 2021 Copyright:
                 <a href="#"> Shigeyoshi Koyama</a>
             </div>
         </small>
-        <!-- Copyright -->
     </footer>
 
     <!-- JQuery -->

@@ -1,12 +1,12 @@
 @csrf
 <div class="md-form">
     <label>魚種（全角カナで入力）</label>
-    <input type="text" name="title" class="form-control" required value="{{ old('title') }}">
+    <input type="text" name="fish_kind" class="form-control" required value="{{ old('fish_kind') }}">
 </div>
 <div class="md-form">
     <label>
         <span class="btn btn-blue-grey btn-sm" style="margin: 0;">
-            写真を選ぶ<input type="file" name="img_file" id ="js-img-preview" style="display:none" accept="image/*">
+            写真を選ぶ<input type="file" name="img_file" id ="js-img-preview" style="display:none" accept="image/*" required>
         </span>
     </label>
     <input type="text" id="js-filename-view" class="form-control" readonly="">
