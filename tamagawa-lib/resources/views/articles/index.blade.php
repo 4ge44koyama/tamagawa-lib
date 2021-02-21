@@ -7,7 +7,7 @@
     <div class="container">
         @foreach($articles as $article)
             <div class="card mt-3">
-                <div class="card-body d-flex flex-row">
+                <div class="card-header d-flex flex-row">
                     <i class="fas fa-user-circle fa-3x mr-1"></i>
                     <div>
                         <div class="font-weight-bold">
@@ -18,13 +18,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body pt-0 pb-2">
-                    <h3 class="h4 card-title">
-                        {{ $article->title }}
-                    </h3>
-                    <div class="card-text">
-                        {!! nl2br(e( $article->body )) !!}
+                <div class="card-body pt-0 pb-2 mt-4">
+                    <h5 class="card-title">{{ $article->fish_kind }}</h5>
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <img src="/storage/images/{{ $article->img }}" class="img-fluid" alt="多摩川で釣れた{{ $article->fish_kind }}の画像">
+                        <a href="#">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+                        </a>
                     </div>
+                    <p class="card-text">
+                        {!! nl2br(e( $article->body )) !!}
+                    </p>
+                    <a href="#" class="">見る</a>
                 </div>
             </div>
         @endforeach
