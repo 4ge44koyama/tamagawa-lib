@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Http\Requests\ArticleRequest;
+use App\Http\Requests\ArticleEditRequest;
 use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Http\Request;
@@ -29,17 +30,45 @@ class ArticleController extends Controller
     // 新規投稿保存
     public function store(ArticleRequest $request, Article $article)
     {
-        $article->fish_kind = $request->fish_kind;
-        $article->spot      = $request->spot;
-        $article->body      = $request->body;
-        $article->user_id   = $request->user()->id;
+        $article->fill($request->all()); // [fish_kind, spot, body]
+        $article->user_id = $request->user()->id;
 
         // 画像の処理
-        $fileName           = $this->saveImage($request->file('img'));
-        $article->img       = $fileName;
+        $user_id      = $article->user_id;
+        $file_name    = $this->saveImage($request->file('img'), $user_id);
+        $article->img = $file_name;
 
         $article->save();
         return redirect()->route('articles.index'); 
+    }
+
+    // 投稿編集画面表示
+    public function edit(Article $article)
+    {
+        return view('articles.edit', ['article' => $article]);
+    }
+
+    // 投稿編集更新処理
+    public function update(ArticleEditRequest $request, Article $article)
+    {
+        $article->fill($request->all()); // [fish_kind, spot, body]
+        
+        // 画像が変更されている場の処理
+        if ($request->file('img')) {
+
+            $user_id = $request->user()->id;
+            $old_img = $article->img;
+
+            // 旧画像ファイルをストレージから削除する
+            $this->deleteOldImg($user_id, $old_img);
+
+            // 変更後の画像ファイル処理
+            $file_name    = $this->saveImage($request->file('img'), $user_id);
+            $article->img = $file_name;
+        }
+
+        $article->save();
+        return redirect()->route('articles.index');
     }
 
     /**
@@ -47,21 +76,22 @@ class ArticleController extends Controller
       * ユーザーidごとに画像用ディレクトリを作成する。
       * 投稿用画像をリサイズして保存する。
       *
-      * @param UploadedFile $file アップロードされたアバター画像
+      * @param UploadedFile $file アップロードされた画像
+      * @param int $user_id       投稿ユーザーid
       * @return string ファイル名
       */
-    private function saveImage(UploadedFile $file,  Article $article): string
+    private function saveImage(UploadedFile $file, int $user_id): string
     {
-        $tempPath = $this->makeTempPath();
+        $temp_path = $this->makeTempPath();
         Image::make($file)->resize(300, 300, function ($constraint) {
                             $constraint->aspectRatio();
-                        })->save($tempPath);
+                        })->save($temp_path);
 
-        // 本番環境ではs3に変更する
-        $filePath = Storage::disk('public')
-            ->putFile('images', new File($tempPath));
+        $user_dir  = 'images/' . $user_id;
+        $file_path = Storage::disk('public') // 本番環境ではs3に変更する
+            ->putFile($user_dir, new File($temp_path));
 
-        return basename($filePath);
+        return basename($file_path);
     }
 
     /**
@@ -72,23 +102,17 @@ class ArticleController extends Controller
       */
     private function makeTempPath(): string
     {
-        $tmp_fp = tmpfile();
-        $meta   = stream_get_meta_data($tmp_fp);
+        $tmp_fp    = tmpfile();
+        $meta_data = stream_get_meta_data($tmp_fp);
 
-        return $meta['uri'];
+        return $meta_data['uri'];
     }
 
-    /**
-      * 画像保存用
-      * 一時的なファイルを生成してパスを返す。
-      *
-      * @return string ファイルパス
-      */
-    private function makeDir(Article $article): string
+    // 記事更新時にストレージから旧画像を削除
+    private function deleteOldImg(int $user_id, string $old_img): void
     {
-        $tmp_fp = tmpfile();
-        $meta   = stream_get_meta_data($tmp_fp);
-
-        return $meta['uri'];
+        $user_dir = 'images/' . $user_id . '/' . $old_img;
+        Storage::disk('public')->delete($user_dir); // 本番環境ではs3に変更する
     }
+
 }

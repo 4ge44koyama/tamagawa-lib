@@ -1,11 +1,10 @@
 <?php
-// ArticleController store action
 
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ArticleRequest extends FormRequest
+class ArticleEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +23,12 @@ class ArticleRequest extends FormRequest
      */
     public function rules()
     {
+        // imgが必須ではない
         $rules = [
             'fish_kind' => ['required', 'max:50'], 
             'spot'      => ['required', 'max:100'], 
             'body'      => ['required', 'max:500'], 
-            'img'       => ['required', 'file', 'image', 'mimes:jpeg,png,jpg,gif', 'max: 1024'], 
+            'img'       => ['file', 'image', 'mimes:jpeg,png,jpg,gif', 'max: 1024'], 
         ];
 
         return $rules;
