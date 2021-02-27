@@ -4,6 +4,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\OnlyZenKatakana;
 
 class ArticleRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'fish_kind' => ['required', 'max:50'], 
+            'fish_kind' => ['required', 'max:50', new OnlyZenKatakana], 
             'spot'      => ['required', 'max:100'], 
             'body'      => ['required', 'max:500'], 
             'img'       => ['required', 'file', 'image', 'mimes:jpeg,png,jpg,gif', 'max: 1024'], 
