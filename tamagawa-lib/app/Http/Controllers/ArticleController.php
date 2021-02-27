@@ -60,7 +60,7 @@ class ArticleController extends Controller
             $old_img = $article->img;
 
             // 旧画像ファイルをストレージから削除する
-            $this->deleteOldImg($user_id, $old_img);
+            $this->deleteImage($user_id, $old_img);
 
             // 変更後の画像ファイル処理
             $file_name    = $this->saveImage($request->file('img'), $user_id);
@@ -68,6 +68,14 @@ class ArticleController extends Controller
         }
 
         $article->save();
+        return redirect()->route('articles.index');
+    }
+
+    public function destroy(Article $article)
+    {
+        $this->deleteImage($article->user_id, $article->img); // 画像ファイルをストレージから削除
+        
+        $article->delete(); // DBからレコードを削除
         return redirect()->route('articles.index');
     }
 
@@ -108,10 +116,10 @@ class ArticleController extends Controller
         return $meta_data['uri'];
     }
 
-    // 記事更新時にストレージから旧画像を削除
-    private function deleteOldImg(int $user_id, string $old_img): void
+    // ストレージから画像ファイルを削除
+    private function deleteImage(int $user_id, string $img): void
     {
-        $user_dir = 'images/' . $user_id . '/' . $old_img;
+        $user_dir = 'images/' . $user_id . '/' . $img;
         Storage::disk('public')->delete($user_dir); // 本番環境ではs3に変更する
     }
 
