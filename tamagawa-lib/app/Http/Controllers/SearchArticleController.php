@@ -20,7 +20,7 @@ class SearchArticleController extends Controller
             
             $keyword = $request->input('keyword');
             $escaped = '%' . $this->escape($keyword) . '%';
-            
+
             $query = Article::query();
             $query->where(function ($query) use ($escaped) {
                 $query->where('fish_kind', 'LIKE', $escaped);
@@ -30,6 +30,7 @@ class SearchArticleController extends Controller
             // 検索条件に該当する投稿を取得
             $articles = $query->orderBy('created_at', 'DESC')->get();
 
+            // ビューはTOPと同じ
             return view('articles.index', compact('articles', 'keyword'));
         }
 
@@ -40,8 +41,8 @@ class SearchArticleController extends Controller
     private function escape(string $value)
     {
         return str_replace(
-            ['\\', '%', '_'],
-            ['\\\\', '\\%', '\\_'],
+            ['\\', '%', '_'], 
+            ['\\\\', '\\%', '\\_'], 
             $value
         );
     }

@@ -74,9 +74,14 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         $this->deleteImage($article->user_id, $article->img); // 画像ファイルをストレージから削除
-        
+
         $article->delete(); // DBからレコードを削除
         return redirect()->route('articles.index');
+    }
+
+    public function show(Article $article)
+    {
+        return view('articles.show', ['article' => $article]);
     }
 
     /**
