@@ -70,8 +70,14 @@
             {!! nl2br(e( $article->body )) !!}
             @endif
         </p>
-        <div class="text-right font-weight-lighter">
-            {{ $article->created_at->format('Y/m/d H:i') }} 
+        <div class="d-flex justify-content-between">
+            <div class="card-text">
+                <article-like>
+                </article-like>
+            </div>
+            <div class="text-right font-weight-lighter">
+                {{ $article->created_at->format('Y/m/d H:i') }} 
+            </div>
         </div>
         <div class="text-right">
             @if( Route::is('articles.index') )
