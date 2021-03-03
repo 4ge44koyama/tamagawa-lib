@@ -3,16 +3,13 @@
     <label>魚種（全角カナで入力）</label>
     <input type="text" name="fish_kind" class="form-control" required value="{{ $article->fish_kind ?? old('fish_kind') }}">
 </div>
-<div>
-    <label class="mb-0">
-        <span class="btn btn-blue-grey btn-sm" style="margin: 0; padding: 4px;">
-            写真を選ぶ<input type="file" name="img" id="js-img-preview" style="display:none">
-        </span>
-    </label>
-    <div class="md-form pt-0" style="margin: 0;">
-        <input type="text" id="js-filename-view" class="form-control pt-0" readonly="{{ $article->img ?? old('img') }}">
-    </div>
-</div>
+<!-- FileInput.vue -->
+<file-input
+    :initial-file-name='@json($article->img ?? old("img"))'
+    :initial-article-user-id='@json($article->user_id ?? old("user_id"))'
+>
+</file-input>
+<!-- FileInput.vue -->
 <div class="md-form">
     <label>釣った場所</label>
     <input type="text" name="spot" class="form-control" required value="{{ $article->spot ?? old('spot') }}">

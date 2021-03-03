@@ -55,11 +55,8 @@
         </h6>
     </div>
 
-    <div class="bg-image hover-overlay ripple my-0 mx-auto" data-mdb-ripple-color="light">
+    <div class="bg-image my-0 mx-auto">
         <img src="/storage/images/{{ $article->user_id . '/' .$article->img }}" class="img-fluid" alt="多摩川で釣れた{{ $article->fish_kind }}の画像">
-        <a href="#">
-            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-        </a>
     </div>
 
     <div class="card-body pt-0 pb-2 mt-4">
@@ -72,6 +69,7 @@
         </p>
         <div class="d-flex justify-content-between">
             <div class="card-text">
+                <!-- ArticleLike.vue -->
                 <article-like
                     :initial-is-liked-by='@json($article->isLikedBy(Auth::user()))'
                     :initial-count-likes='@json($article->count_likes)'
@@ -79,6 +77,7 @@
                     endpoint="{{ route('articles.like', ['article' => $article]) }}"
                 >
                 </article-like>
+                <!-- ArticleLike.vue -->
             </div>
             <div class="text-right font-weight-lighter">
                 {{ $article->created_at->format('Y/m/d H:i') }} 
