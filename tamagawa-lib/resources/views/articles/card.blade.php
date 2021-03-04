@@ -51,7 +51,9 @@
         </div>
 
         <h6 class="card-subtitle mb-2 text-muted text-right">
-            <span class="small">投稿者: </span>{{ $article->user->name }}<span class="small"> さん</span>
+            <a href="{{ route('users.show', ['user' => $article->user]) }}">
+                <span class="small">投稿者: </span>{{ $article->user->name }}<span class="small"> さん</span>
+            </a>
         </h6>
     </div>
 

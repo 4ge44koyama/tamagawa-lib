@@ -19,3 +19,10 @@ Route::prefix('articles')->name('articles.')->group(function () {
     Route::put('/{article}/like', 'ArticleController@like')->name('like')->middleware('auth');
     Route::delete('/{article}/like', 'ArticleController@unlike')->name('unlike')->middleware('auth');
 });
+Route::prefix('users')->name('users.')->group(function () {
+    Route::get('/{user}', 'UserController@show')->name('show');
+    Route::middleware('auth')->group(function () {
+        Route::put('/{user}/follow', 'UserController@follow')->name('follow');
+        Route::delete('/{user}/follow', 'UserController@unfollow')->name('unfollow');
+    });
+});

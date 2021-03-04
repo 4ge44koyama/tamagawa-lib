@@ -40,6 +40,7 @@ export default {
         }
         return {
             fileName: path, 
+            inputImg: null, 
         }
     }, 
     methods: {
