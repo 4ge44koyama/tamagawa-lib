@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', $user->name)
+@section('title', $user->name . 'のいいねした記事')
 
 @section('content')
     @include('nav')
@@ -19,12 +19,12 @@
 
         <ul class="nav nav-tabs nav-justified mt-3">
             <li class="nav-item">
-                <a class="nav-link text-muted active" href="{{ route('users.show', ['user' => $user]) }}">
+                <a class="nav-link text-muted" href="{{ route('users.show', ['user' => $user]) }}">
                     記事
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-muted" href="{{ route('users.likes', ['user' => $user]) }}">
+                <a class="nav-link text-muted active" href="{{ route('users.likes', ['user' => $user]) }}">
                     いいね
                 </a>
             </li>
@@ -33,6 +33,6 @@
         @foreach($articles as $article)
             @include('articles.card')
         @endforeach
-
+        
     </div>
 @endsection

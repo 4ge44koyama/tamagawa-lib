@@ -9,7 +9,14 @@ class UserController extends Controller
 {
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        $articles = $user->articles->sortByDesc('created_at');
+        return view('users.show', compact('user', 'articles'));
+    }
+
+    public function likes(User $user)
+    {
+        $articles = $user->likes->sortByDesc('created_at');
+        return view('users.likes', compact('user', 'articles'));
     }
 
     public function follow(Request $request, int $user_id): array

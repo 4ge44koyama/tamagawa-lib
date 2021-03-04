@@ -63,11 +63,11 @@
 
     <div class="card-body pt-0 pb-2 mt-4">
         <p class="card-text">
-            @if( Route::is('articles.index') )
-            {{ mb_strimwidth($article->body, 0, 200, '…', 'UTF-8') }}
-            @else
+        @if( Route::is('articles.show') )
             {!! nl2br(e( $article->body )) !!}
-            @endif
+        @else
+            {{ mb_strimwidth($article->body, 0, 200, '…', 'UTF-8') }}
+        @endif
         </p>
         <div class="d-flex justify-content-between">
             <div class="card-text">
@@ -86,11 +86,11 @@
             </div>
         </div>
         <div class="text-right">
-            @if( Route::is('articles.index') )
-            <a href="/articles/{{ $article->id }}">詳細を見る</a>
-            @else
+        @if( Route::is('articles.show') )
             <a href="/">戻る</a>
-            @endif
+        @else
+            <a href="/articles/{{ $article->id }}">詳細を見る</a>
+        @endif
         </div>
     </div>
 

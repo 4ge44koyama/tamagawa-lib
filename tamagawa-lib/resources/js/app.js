@@ -1,8 +1,8 @@
 import './bootstrap'
 import Vue from 'vue'
-import ArticleLike from './components/ArticleLike'
-import FileInput from './components/FileInput'
-import UserCard from './components/UserCard'
+import ArticleLike from './components/module/ArticleLike'
+import FileInput from './components/module/FileInput'
+import UserCard from './components/module/UserCard'
 
 const app = new Vue({
     el: '#app',
