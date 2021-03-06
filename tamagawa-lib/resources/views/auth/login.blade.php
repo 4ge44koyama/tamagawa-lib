@@ -33,6 +33,10 @@
 
                             </form>
 
+                            <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger mb-4">
+                                <i class="fab fa-google mr-1"></i>Googleアカウントでログイン
+                            </a>
+
                             <div class="mt-0">
                                 <a href="{{ route('register') }}" class="card-text">ユーザー登録はこちら</a>
                             </div>

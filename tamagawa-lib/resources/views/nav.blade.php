@@ -13,10 +13,10 @@
                 <button class="dropdown-item" type="button" onclick="location.href='{{ route('register') }}'">
                     ユーザー登録
                 </button>
+                <div class="dropdown-divider"></div>
                 <button class="dropdown-item" type="button" onclick="location.href='{{ route('login') }}'">
                     ログイン
                 </button>
-                <div class="dropdown-divider"></div>
             </div>
         </li>
         @endguest
