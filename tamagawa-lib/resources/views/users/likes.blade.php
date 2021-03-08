@@ -9,26 +9,18 @@
         <user-card
             :initial-is-followed-by='@json($user->isFollowedBy(Auth::user()))'
             :authorized='@json(Auth::check())'
-            :checkself='@json($user->checkSelf(Auth::user(), $user))'
-            :username='@json($user->name)'
+            :check-self='@json($user->checkSelf(Auth::user(), $user))'
+            :user-name='@json($user->name)'
             :initial-followings='@json($user->count_followings)'
             :initial-followers='@json($user->count_followers )'
+            show-user-path="{{ route('users.show', ['user' => $user]) }}"
+            followings-path="{{ route('users.followings', ['user' => $user]) }}"
+            followers-path="{{ route('users.followers', ['user' => $user]) }}"
             endpoint="{{ route('users.follow', ['user' => $user]) }}"
         >
         </user-card>
 
-        <ul class="nav nav-tabs nav-justified mt-3">
-            <li class="nav-item">
-                <a class="nav-link text-muted" href="{{ route('users.show', ['user' => $user]) }}">
-                    記事
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-muted active" href="{{ route('users.likes', ['user' => $user]) }}">
-                    いいね
-                </a>
-            </li>
-        </ul>
+        @include('users.tabs', ['hasArticles' => false, 'hasLikes' => true])
 
         @foreach($articles as $article)
             @include('articles.card')

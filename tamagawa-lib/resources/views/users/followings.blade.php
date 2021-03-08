@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', $user->name)
+@section('title', $user->name . 'のフォロー中')
 
 @section('content')
     @include('nav')
@@ -20,11 +20,8 @@
         >
         </user-card>
 
-        @include('users.tabs', ['hasArticles' => true, 'hasLikes' => false])
-
-        @foreach($articles as $article)
-            @include('articles.card')
+        @foreach($followings as $person)
+            @include('users.person')
         @endforeach
-
     </div>
 @endsection

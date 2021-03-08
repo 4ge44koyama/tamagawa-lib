@@ -2,10 +2,12 @@
     <div class="card mt-3">
         <div class="card-body">
             <div class="d-flex flex-row">
-                <a href="#" class="text-dark">
+                <a class="text-dark"
+                    :href="ShowUserPath"
+                >
                     <i class="fas fa-user-circle fa-3x"></i>
                 </a>
-                <div v-if="checkself" class="ml-auto">
+                <div v-if="CheckSelf" class="ml-auto">
                     <button class="btn-sm shadow-none border border-primary p-2"
                         :class="buttonColor"
                         @click="clickFollow"
@@ -18,22 +20,28 @@
                 </div>
             </div>
             <h2 class="h5 card-title m-0">
-                <a href="#" class="text-dark">
-                    {{ username }}
+                <a class="text-dark"
+                    :href="ShowUserPath"
+                >
+                    {{ UserName }}
                 </a>
             </h2>
         </div>
         <div class="card-body">
             <div class="card-text">
-                <a href="#" class="text-muted">
+                <a class="text-muted"
+                    :href="FollowingsPath"
+                >
                     {{ Followings }} フォロー
                 </a>
-                <a href="#" class="text-muted">
+                <a class="text-muted"
+                    :href="FollowersPath"
+                >
                     {{ Followers }} フォロワー
                 </a>
             </div>
             <div class="text-right">
-                <a href="/">戻る</a>
+                <a href="/">TOPへ</a>
             </div>
         </div>
     </div>
@@ -47,14 +55,14 @@ export default {
             default: false, 
         }, 
         authorized: {
-        type: Boolean, 
-        default: false, 
-        }, 
-        checkself: {
             type: Boolean, 
             default: false, 
         }, 
-        username: {
+        CheckSelf: {
+            type: Boolean, 
+            default: false, 
+        }, 
+        UserName: {
             type: String, 
             default: null, 
         }, 
@@ -65,6 +73,15 @@ export default {
         initialFollowers: {
             type: Number, 
             default: 0, 
+        }, 
+        ShowUserPath: {
+            type: String, 
+        }, 
+        FollowingsPath: {
+            type: String, 
+        }, 
+        FollowersPath: {
+            type: String, 
         }, 
         endpoint: {
             type: String, 

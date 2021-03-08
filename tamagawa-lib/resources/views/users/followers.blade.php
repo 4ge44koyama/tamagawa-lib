@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', $user->name)
+@section('title', $user->name . 'のフォロワー')
 
 @section('content')
     @include('nav')
@@ -19,12 +19,9 @@
             endpoint="{{ route('users.follow', ['user' => $user]) }}"
         >
         </user-card>
-
-        @include('users.tabs', ['hasArticles' => true, 'hasLikes' => false])
-
-        @foreach($articles as $article)
-            @include('articles.card')
+        
+        @foreach($followers as $person)
+            @include('users.person')
         @endforeach
-
     </div>
 @endsection

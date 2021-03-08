@@ -66,8 +66,11 @@ class User extends Authenticatable
             : false;
     }
 
-    public function checkSelf(User $auth_user, User $show_user): bool
+    public function checkSelf(?User $auth_user, User $show_user): bool
     {
+        if (!$auth_user) {
+            return false;
+        }
         return $auth_user->id !== $show_user->id;
     }
     

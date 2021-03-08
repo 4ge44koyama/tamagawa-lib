@@ -28,7 +28,8 @@ class SearchArticleController extends Controller
             });
 
             // 検索条件に該当する投稿を取得
-            $articles = $query->orderBy('created_at', 'DESC')->get();
+            $articles = $query->orderBy('created_at', 'DESC')->get()
+                        ->load(['user', 'likes']);
 
             // ビューはTOPと同じ
             return view('articles.index', compact('articles', 'keyword'));

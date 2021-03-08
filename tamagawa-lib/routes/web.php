@@ -30,6 +30,8 @@ Route::prefix('articles')->name('articles.')->group(function () {
 Route::prefix('users')->name('users.')->group(function () {
     Route::get('/{user}', 'UserController@show')->name('show');
     Route::get('/{user}/likes', 'UserController@likes')->name('likes');
+    Route::get('/{user}/followings', 'UserController@followings')->name('followings');
+    Route::get('/{user}/followers', 'UserController@followers')->name('followers');
     Route::middleware('auth')->group(function () {
         Route::put('/{user}/follow', 'UserController@follow')->name('follow');
         Route::delete('/{user}/follow', 'UserController@unfollow')->name('unfollow');

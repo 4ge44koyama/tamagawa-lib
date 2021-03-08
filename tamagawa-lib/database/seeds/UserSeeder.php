@@ -20,8 +20,20 @@ class UserSeeder extends Seeder
         ]);
 
         factory(User::class)->create([
-            'name' => 'TestUser',
-            'email' => 'test_user@example.com',
+            'name' => 'TestUser1',
+            'email' => 'test_user1@example.com',
+            'password' => Hash::make('password'),
+        ]);
+
+        factory(User::class)->create([
+            'name' => 'TestUser2',
+            'email' => 'test_user2@example.com',
+            'password' => Hash::make('password'),
+        ]);
+
+        factory(User::class)->create([
+            'name' => 'TestUser3',
+            'email' => 'test_user3@example.com',
             'password' => Hash::make('password'),
         ]);
     }
