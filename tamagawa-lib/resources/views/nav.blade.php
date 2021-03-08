@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-dark blue-gradient mb-2">
+<nav class="navbar navbar-expand navbar-dark blue mb-2">
 
     <a class="navbar-brand" href="/">多摩川釣り図鑑</a>
 

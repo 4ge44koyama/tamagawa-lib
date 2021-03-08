@@ -29,13 +29,7 @@
     </div>
 
     <!-- footer -->
-    <footer class="page-footer font-small blue" style="margin-top: 1.6rem;">
-        <small>
-            <div class="footer-copyright text-center py-3">© 2021 Copyright:
-                <a href="#"> Shigeyoshi Koyama</a>
-            </div>
-        </small>
-    </footer>
+    @include('footer')
 
     <script src="{{ mix('js/app.js') }}"></script>
     <!-- JQuery -->
