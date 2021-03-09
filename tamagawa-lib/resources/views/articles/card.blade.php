@@ -58,7 +58,7 @@
     </div>
 
     <div class="bg-image my-0 mx-auto">
-        <img src="/storage/images/{{ $article->user_id . '/' .$article->img }}" class="img-fluid" alt="多摩川で釣れた{{ $article->fish_kind }}の画像">
+        <img data-src="/storage/images/{{ $article->user_id . '/' .$article->img }}" class="img-fluid lazyload" alt="多摩川で釣れた{{ $article->fish_kind }}の画像">
     </div>
 
     <div class="card-body pt-0 pb-2 mt-4">
@@ -89,7 +89,9 @@
         @if( Route::is('articles.show') )
             <a href="/">戻る</a>
         @else
-            <a href="/articles/{{ $article->id }}">詳細を見る</a>
+            <a href="/articles/{{ $article->id }}">
+                詳細を見る
+            </a>
         @endif
         </div>
     </div>

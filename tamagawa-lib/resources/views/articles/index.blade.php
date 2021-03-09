@@ -7,6 +7,8 @@
 
     @include('articles.search')
 
+    @include('articles.tabs', ['dispLatest' => true, 'dispLibrary' => false])
+
     <div class="container">
         @foreach($articles as $article)
 

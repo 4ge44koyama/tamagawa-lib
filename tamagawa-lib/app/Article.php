@@ -31,7 +31,8 @@ class Article extends Model
             ? (bool)$this->likes->where('id', $user->id)->count()
             : false;
     }
-
+    
+    // アクセサ
     public function getCountLikesAttribute(): int
     {
         return $this->likes->count();
