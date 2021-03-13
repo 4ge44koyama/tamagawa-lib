@@ -29,9 +29,13 @@
                                 </div>
  
                                 <input type="hidden" name="remember" id="remember" value="on">
-                                <button class="btn btn-block blue-gradient mt-2 mb-2" type="submit">ログイン</button>
+                                <button class="btn btn-block blue-gradient mt-2 mb-2" type="submit">上記内容でログイン</button>
 
                             </form>
+
+                            <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger mb-4">
+                                <i class="fab fa-google mr-1"></i>Googleアカウントでログイン
+                            </a>
 
                             <div class="mt-0">
                                 <a href="{{ route('register') }}" class="card-text">ユーザー登録はこちら</a>

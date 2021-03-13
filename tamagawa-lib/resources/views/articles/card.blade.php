@@ -51,34 +51,48 @@
         </div>
 
         <h6 class="card-subtitle mb-2 text-muted text-right">
-            <span class="small">投稿者: </span>{{ $article->user->name }}<span class="small"> さん</span>
+            <a href="{{ route('users.show', ['user' => $article->user]) }}">
+                <span class="small">投稿者: </span>{{ $article->user->name }}<span class="small"> さん</span>
+            </a>
         </h6>
     </div>
 
-    <div class="bg-image hover-overlay ripple my-0 mx-auto" data-mdb-ripple-color="light">
-        <img src="/storage/images/{{ $article->user_id . '/' .$article->img }}" class="img-fluid" alt="多摩川で釣れた{{ $article->fish_kind }}の画像">
-        <a href="#">
-            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-        </a>
+    <div class="bg-image my-0 mx-auto">
+        <img data-src="/storage/images/{{ $article->user_id . '/' .$article->img }}" class="img-fluid lazyload" alt="多摩川で釣れた{{ $article->fish_kind }}の画像">
     </div>
 
     <div class="card-body pt-0 pb-2 mt-4">
         <p class="card-text">
-            @if( Route::is('articles.index') )
-            {{ mb_strimwidth($article->body, 0, 200, '…', 'UTF-8') }}
-            @else
+        @if( Route::is('articles.show') )
             {!! nl2br(e( $article->body )) !!}
-            @endif
+        @else
+            {{ mb_strimwidth($article->body, 0, 200, '…', 'UTF-8') }}
+        @endif
         </p>
-        <div class="text-right font-weight-lighter">
-            {{ $article->created_at->format('Y/m/d H:i') }} 
+        <div class="d-flex justify-content-between">
+            <div class="card-text">
+                <!-- ArticleLike.vue -->
+                <article-like
+                    :initial-is-liked-by='@json($article->isLikedBy(Auth::user()))'
+                    :initial-count-likes='@json($article->count_likes)'
+                    :authorized='@json(Auth::check())'
+                    endpoint="{{ route('articles.like', ['article' => $article]) }}"
+                >
+                </article-like>
+                <!-- ArticleLike.vue -->
+            </div>
+            <div class="text-right font-weight-lighter">
+                {{ $article->created_at->format('Y/m/d H:i') }} 
+            </div>
         </div>
         <div class="text-right">
-            @if( Route::is('articles.index') )
-            <a href="/articles/{{ $article->id }}">詳細を見る</a>
-            @else
+        @if( Route::is('articles.show') )
             <a href="/">戻る</a>
-            @endif
+        @else
+            <a href="/articles/{{ $article->id }}">
+                詳細を見る
+            </a>
+        @endif
         </div>
     </div>
 

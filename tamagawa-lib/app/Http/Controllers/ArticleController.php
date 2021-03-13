@@ -16,7 +16,8 @@ class ArticleController extends Controller
     // 投稿一覧画面表示
     public function index()
     {
-        $articles = Article::all()->sortByDesc('created_at');
+        $articles = Article::all()->sortByDesc('created_at')
+                    ->load(['user', 'likes']);
         
         return view('articles.index', ['articles' => $articles]);
     }
@@ -126,6 +127,27 @@ class ArticleController extends Controller
     {
         $user_dir = 'images/' . $user_id . '/' . $img;
         Storage::disk('public')->delete($user_dir); // 本番環境ではs3に変更する
+    }
+
+    public function like(Request $request, Article $article)
+    {
+        $article->likes()->detach($request->user()->id);
+        $article->likes()->attach($request->user()->id);
+
+        return [
+            'id' => $article->id,
+            'countLikes' => $article->count_likes,
+        ];
+    }
+
+    public function unlike(Request $request, Article $article)
+    {
+        $article->likes()->detach($request->user()->id);
+
+        return [
+            'id' => $article->id,
+            'countLikes' => $article->count_likes,
+        ];
     }
 
 }

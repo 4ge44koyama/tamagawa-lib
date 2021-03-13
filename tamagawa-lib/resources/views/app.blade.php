@@ -13,22 +13,25 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
+    <style>
+    body {
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+    </style>
 </head>
 
 <body>
 
     <!-- main -->
-    @yield('content')
+    <div id="app">
+        @yield('content')
+    </div>
 
     <!-- footer -->
-    <footer class="page-footer font-small blue" style="margin-top: 1.6rem;">
-        <small>
-            <div class="footer-copyright text-center py-3">© 2021 Copyright:
-                <a href="#"> Shigeyoshi Koyama</a>
-            </div>
-        </small>
-    </footer>
+    @include('footer')
 
+    <script src="{{ mix('js/app.js') }}"></script>
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Bootstrap tooltips -->
@@ -37,6 +40,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/js/mdb.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.min.js"></script>
+    <script type="text/javascript">lazyload();</script>
 </body>
 
 </html>
