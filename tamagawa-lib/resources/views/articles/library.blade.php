@@ -3,10 +3,9 @@
 @section('title', '図鑑')
 
 @section('content')
+
     @include('nav')
-
     @include('articles.search')
-
     @include('articles.tabs', ['dispLatest' => false, 'dispLibrary' => true])
 
     <div class="container">
